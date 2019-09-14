@@ -17,7 +17,12 @@ const ProfileType = new GraphQLObjectType({
       games: {
         type: new GraphQLList(GameInstanceType),
         resolve(parent, args) {
-          return GameInstanceModel.find({player1Id: parent._id})
+          return GameInstanceModel.find({
+            $or: [
+              {player1Id: parent._id},
+              {player2Id: parent._id}
+            ]
+          })
         }
       }
     }
@@ -46,10 +51,22 @@ const GameInstanceType = new GraphQLObjectType({
           return GameModel.findById(parent.gameId)
         }
       },
+      currentPlayerId: {
+        type: GraphQLID,
+        resolve(parent, args) {
+          return parent.currentPlayerId
+        }
+      },
       player1: {
         type: ProfileType,
         resolve(parent, args) {
           return ProfileModel.findById(parent.player1Id)
+        }
+      },
+      player2: {
+        type: ProfileType,
+        resolve(parent, args) {
+          return ProfileModel.findById(parent.player2Id)
         }
       }
     }
