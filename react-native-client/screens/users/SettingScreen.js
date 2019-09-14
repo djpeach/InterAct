@@ -1,16 +1,32 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
 import HeaderButton from "../../components/UI/HeaderButton";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import firebase from "firebase";
 
 const SettingScreen = props => {
+  const signOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        console.log("suc");
+      })
+      .catch(function(error) {
+        console.log(error.message);
+      });
+  };
+
   return (
     <View style={styles.settings}>
       <Text style={styles.settingsFont}>Change Password</Text>
       <Text style={styles.settingsFont}>Change E-mail</Text>
       <Text style={styles.settingsFont}>Change Name</Text>
       <Text style={styles.settingsFont}>Change Profile Picture</Text>
+      <View style={styles.signOut}>
+        <Button title="Sign Out" onPress={signOut} />
+      </View>
     </View>
   );
 };
@@ -53,6 +69,10 @@ const styles = StyleSheet.create({
     //fontFamily: "San Francisco",
     fontSize: 20,
     margin: 20
+  },
+  signOut: {
+    width: 200,
+    height: 100
   }
 });
 
