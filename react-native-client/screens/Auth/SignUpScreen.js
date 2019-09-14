@@ -94,16 +94,16 @@ class SignUpScreen extends Component {
                 placeholder={{ label: "Account Type" }}
                 onValueChange={value => this.setState({ accountType: value })}
                 items={[
-                  { label: "EMS", value: "ems" },
-                  { label: "Fire fighter", value: "fire" },
+                  { label: "EMS", value: "EMS" },
+                  { label: "Fire fighter", value: "Fire" },
                   {
                     label: "Health Care Professionals",
-                    value: "health"
+                    value: "Health"
                   },
-                  { label: "Law Enforcement", value: "law" },
+                  { label: "Law Enforcement", value: "Law" },
                   {
                     label: "Community Member",
-                    value: "public"
+                    value: "Public"
                   }
                 ]}
               />
