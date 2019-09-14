@@ -10,7 +10,7 @@ module.exports.createProfile = {
       lastName: { type: GraphQLNonNull(GraphQLString) },
       accountType: { type: GraphQLNonNull(GraphQLString) },
       phoneNumber: { type: GraphQLNonNull(GraphQLString) },
-      isNumberVerified: { type: GraphQLNonNull(GraphQLBoolean) },
+      isNumberVerified: { type: GraphQLBoolean },
       email: { type: GraphQLNonNull(GraphQLString) },
       topGames: { type: GraphQLList(GraphQLString)},
       communityRadius: { type: GraphQLInt }

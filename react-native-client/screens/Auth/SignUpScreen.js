@@ -12,6 +12,9 @@ import {
 } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
+import {createProfile} from '../../graphql'
+import {flowRight as compose} from 'lodash'
+import {graphql} from 'react-apollo'
 
 import firebase from "firebase";
 
@@ -31,8 +34,17 @@ class SignUpScreen extends Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        const user = firebase.auth().currentUser;
-
+        return this.props.createProfile({
+          variables: {
+            _id: firebase.auth().currentUser.uid,
+            firstName: this.state.first,
+            lastName: this.state.last,
+            accountType: this.state.accountType,
+            phoneNumber: this.state.phone,
+            email: this.state.email
+          }
+        })
+      }).then(() => {
         this.props.navigation.replace("MainScreen");
       })
       .catch(err => {
@@ -82,16 +94,16 @@ class SignUpScreen extends Component {
                 placeholder={{ label: "Account Type" }}
                 onValueChange={value => this.setState({ accountType: value })}
                 items={[
-                  { label: "EMS", value: "ems" },
-                  { label: "Fire fighter", value: "fire" },
+                  { label: "EMS", value: "EMS" },
+                  { label: "Fire fighter", value: "Fire" },
                   {
                     label: "Health Care Professionals",
-                    value: "health"
+                    value: "Health"
                   },
-                  { label: "Law Enforcement", value: "law" },
+                  { label: "Law Enforcement", value: "Law" },
                   {
                     label: "Community Member",
-                    value: "public"
+                    value: "Public"
                   }
                 ]}
               />
@@ -205,4 +217,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUpScreen;
+export default compose(
+  graphql(createProfile, {name: 'createProfile'})
+)(SignUpScreen)
