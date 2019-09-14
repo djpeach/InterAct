@@ -13,7 +13,6 @@ const GameItem = props => {
             </Text>
           </View>
           <View style={{ ...styles.mealRow, ...styles.gameDetail }}>
-            <Text style={styles.rating}>Test</Text>
             <View style={styles.playContainer}>
               <Text style={styles.details}>Play</Text>
               <Ionicons name="ios-play" size={40} color="black" />
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
   gameDetail: {
     backgroundColor: "#EFA3A3",
     paddingHorizontal: 10,
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     alignItems: "center",
     height: "25%"
   },

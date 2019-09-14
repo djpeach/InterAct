@@ -4,9 +4,8 @@ import { ApolloClient, HttpLink, InMemoryCache } from "apollo-boost";
 import { ApolloProvider, graphql } from "react-apollo";
 
 import MainNav from "./navigation/MainNav";
-import ProfileScreen from "./screens/users/ProfileScreen";
-import SettingScreen from "./screens/users/SettingScreen";
-import QuickPlayScreen from "./screens/users/QuickPlayScreen"
+
+import LoginScreen from "./screens/Auth/LoginScreen";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://10.34.244.98:9000/graphql" }),

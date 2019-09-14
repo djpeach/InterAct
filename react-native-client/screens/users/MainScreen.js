@@ -10,8 +10,7 @@ import HeaderButton from "../../components/UI/HeaderButton";
 import GameList from "../../components/UI/GameList";
 
 const test = [{ title: "test" }, { title: "test1" }, { title: "test2" }];
-const MainScreen = props => {
-  /*const MainScreen = ({ getAllProfiles }) => {
+const MainScreen = ({ getAllProfiles }) => {
   const { loading, getAllProfiles: profiles, error } = getAllProfiles;
   if (loading) {
     return (
@@ -33,8 +32,15 @@ const MainScreen = props => {
         })}
       </View>
     );
-  }*/
-  return <GameList listData={test} />;
+  }
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ alignItems: "center", marginTop: 15 }}>
+        <TextInput placeholder="Search Game" style={styles.searchBar} />
+      </View>
+      <View>{/*<GameList listData={games} />*/}</View>
+    </View>
+  );
 };
 
 MainScreen.navigationOptions = navData => {

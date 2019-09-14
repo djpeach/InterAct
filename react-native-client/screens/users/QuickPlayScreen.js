@@ -5,14 +5,17 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 import { flowRight as compose } from "lodash";
 import { graphql } from "@apollo/react-hoc";
-import { getAllGames } from "../../graphql";
+import { getAllGames, searchGameByTitle } from "../../graphql";
 
 import GameList from "../../components/UI/GameList";
-const test = [{ title: "test" }, { title: "test1" }, { title: "test2" }];
-const QuickPlayScreen = props => {
-  /*const QuickPlayScreen = ({ getAllGames }) => {*/
+const QuickPlayScreen = ({ getAllGames, searchGameByTitle }) => {
+  const { loading, getAllGames: games, error } = getAllGames;
+  const {
+    loadingTitle,
+    searchGameByTitle: gamesByTitle,
+    errorTitle
+  } = searchGameByTitle;
 
-  /*const { loading, getAllGames: games, error } = getAllGames;
   if (loading) {
     return (
       <View>
@@ -26,18 +29,23 @@ const QuickPlayScreen = props => {
       </View>
     );
   } else if (games) {
-    return <GameList listData={games} />;
-  }*/
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={{ alignItems: "center", marginTop: 15 }}>
-        <TextInput placeholder="Search Game" style={styles.searchBar} />
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ alignItems: "center", marginTop: 15 }}>
+          <TextInput
+            placeholder="Search Game"
+            style={styles.searchBar}
+            onChangeText={value => {
+              gamesByTitle(value);
+            }}
+          />
+        </View>
+        <View>
+          <GameList listData={games} />
+        </View>
       </View>
-      <View>
-        <GameList listData={test} />
-      </View>
-    </View>
-  );
+    );
+  }
 };
 
 QuickPlayScreen.navigationOptions = navData => {
@@ -108,6 +116,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default compose(graphql(getAllGames, { name: "getAllGames" }))(
-  QuickPlayScreen
-);
+export default compose(
+  graphql(getAllGames, { name: "getAllGames" }),
+  graphql(searchGameByTitle, { name: "searchGameByTitle " })
+)(QuickPlayScreen);
