@@ -1,4 +1,4 @@
-const {GraphQLList} = require('graphql')
+const {GraphQLList, GraphQLString} = require('graphql')
 const { GameType } = require('../types')
 const { GameModel } = require('../../mongodb')
 
@@ -11,7 +11,11 @@ module.exports.getAllGames = {
 
 module.exports.getGamesForTitleQuery = {
   type: GraphQLList(GameType),
-  resolve(parent, args) {
-    return GameModel.find({})
+  args: {
+    query: {type: GraphQLString}
+  },
+  resolve(parent, {query}) {
+    const queryRegex = new RegExp(query, 'i')
+    return query === "" ? [] : GameModel.find({title: queryRegex})
   }
 }
