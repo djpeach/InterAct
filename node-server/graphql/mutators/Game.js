@@ -1,4 +1,4 @@
-const { GraphQLNonNull, GraphQLString, GraphQLID, GraphQLBoolean, GraphQLInt, GraphQLList } = require('graphql')
+const { GraphQLNonNull, GraphQLString } = require('graphql')
 const { GameType } = require('../types')
 const { GameModel } = require('../../mongodb')
 
