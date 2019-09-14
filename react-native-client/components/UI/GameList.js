@@ -3,10 +3,11 @@ import { View, StyleSheet, FlatList, Text } from "react-native";
 import GameItem from "./GameItem";
 import {searchGamesByTitle} from '../../graphql'
 import { graphql } from "@apollo/react-hoc";
-import {flowRight as compose} from 'lodash'
+import {flowRight as compose, get} from 'lodash'
 
 const GameList = ({searchGamesByTitle}) => {
   const {loading, searchGamesByTitle: games, error} = searchGamesByTitle
+  console.log(searchGamesByTitle)
   const renderGameItem = itemData => {
     return <GameItem title={itemData.item.title} onSelectGame={() => {}} />;
   };
@@ -46,7 +47,7 @@ export default compose(
     options: (props) => {
       return {
         variables: {
-          q: props.searchValue
+          query: props.searchValue
         }
       }
     }

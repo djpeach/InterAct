@@ -11,7 +11,7 @@ import {useState} from 'react'
 import GameList from "../../components/UI/GameList";
 const QuickPlayScreen = props => {
 
-  const [searchValue, setSearchValue] = useState([])
+  const [searchValue, setSearchValue] = useState("")
 
   return (
     <View style={{ flex: 1 }}>
