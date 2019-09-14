@@ -5,7 +5,12 @@ import firebase from 'firebase'
 export default class Loading extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? 'MainScreen' : 'SignUpScreen')
+      console.log(user)
+      if (user) {
+        this.props.navigation.navigate('MainScreen')
+      } else {
+        this.props.navigation.navigate('LoginScreen')
+      }
     })
   }
 

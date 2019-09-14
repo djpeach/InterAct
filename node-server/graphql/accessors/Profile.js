@@ -13,10 +13,3 @@ module.exports.getProfileById = {
     return ProfileModel.findById(_id)
   }
 }
-
-module.exports.getAllProfiles = {
-  type: GraphQLList(ProfileType),
-  resolve(parent, args) {
-    return ProfileModel.find()
-  }
-}
