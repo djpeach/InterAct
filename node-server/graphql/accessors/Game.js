@@ -16,6 +16,6 @@ module.exports.searchGamesByTitle = {
   },
   resolve(parent, {query}) {
     const queryRegex = new RegExp(query, 'i')
-    return query === "" ? [] : GameModel.find({title: queryRegex})
+    return query === "" ? GameModel.find({}) : GameModel.find({title: queryRegex})
   }
 }

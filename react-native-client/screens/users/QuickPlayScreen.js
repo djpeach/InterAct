@@ -5,48 +5,29 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 import { flowRight as compose } from "lodash";
 import { graphql } from "@apollo/react-hoc";
-import { getAllGames, searchGameByTitle } from "../../graphql";
+import { getAllGames, searchGamesByTitle } from "../../graphql";
+import {useState} from 'react'
 
 import GameList from "../../components/UI/GameList";
-const QuickPlayScreen = ({ getAllGames, searchGameByTitle }) => {
-  const { loading, getAllGames: games, error } = getAllGames;
-  const {
-    loadingTitle,
-    searchGameByTitle: gamesByTitle,
-    errorTitle
-  } = searchGameByTitle;
+const QuickPlayScreen = props => {
 
-  if (loading) {
-    return (
+  const [searchValue, setSearchValue] = useState([])
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ alignItems: "center", marginTop: 15 }}>
+        <TextInput
+          placeholder="Search Game"
+          style={styles.searchBar}
+          onChangeText={value => {setSearchValue(value)}}
+        />
+      </View>
       <View>
-        <Text>Loading...</Text>
+        <GameList searchValue={searchValue} />
       </View>
-    );
-  } else if (error) {
-    return (
-      <View>
-        <Text>Error: {error.message}</Text>
-      </View>
-    );
-  } else if (games) {
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={{ alignItems: "center", marginTop: 15 }}>
-          <TextInput
-            placeholder="Search Game"
-            style={styles.searchBar}
-            onChangeText={value => {
-              gamesByTitle(value);
-            }}
-          />
-        </View>
-        <View>
-          <GameList listData={games} />
-        </View>
-      </View>
-    );
-  }
-};
+    </View>
+  );
+}
 
 QuickPlayScreen.navigationOptions = navData => {
   return {
@@ -116,7 +97,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default compose(
-  graphql(getAllGames, { name: "getAllGames" }),
-  graphql(searchGameByTitle, { name: "searchGameByTitle " })
-)(QuickPlayScreen);
+export default QuickPlayScreen;

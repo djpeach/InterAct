@@ -8,9 +8,9 @@ export const getAllGames = gql`
   }
 `
 
-export const searchGameByTitle = gql`
+export const searchGamesByTitle = gql`
   query($q: String){
-    searchGameByTitle(query: $q) {
+    searchGamesByTitle(query: $q) {
       id title timesPlayed
     }
   }
