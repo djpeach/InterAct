@@ -1,14 +1,5 @@
 import gql from 'graphql-tag'
 
-export const getAllProfiles = gql`
-query {
-  getAllProfiles {
-    _id
-    email
-  }
-}
-`
-
 export const createProfile = gql`
 mutation($_id: ID!, $firstName: String!, $lastName: String!, $accountType: String!, $phoneNumber: String!
   $isNumberVerified: Boolean, $email: String!, $topGames: [String], $communityRadius: Int) {
