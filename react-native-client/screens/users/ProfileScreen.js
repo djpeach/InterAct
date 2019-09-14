@@ -1,71 +1,49 @@
-import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard
-} from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import React from "react";
+import { View, Text, StyleSheet, Image, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 
-//profile type variable
-var profileType;
+const ProfileScreen = props => {
+  const profile = {
+    firstName: "Logan",
+    lastName: "Troyer",
+    accountType: "Police"
+  };
+  const ProfileType = accountType => {
+    let style = "";
+    switch (accountType) {
+      case "Law":
+        return "#3400FF";
+      case "EMS":
+        return "black";
+      case "Public":
+        return null;
+      case "Health":
 
-//manual assignment for profileType
-profileType = "Police";
+      case "Fire":
+        return "#FF0000";
 
-//checks profile type for name change
-class ProfileName extends Component {
-  render() {
-    let accountName;
-    if (profileType == "Police") {
-      accountName = "Police";
-    } else {
-      accountName = "User";
+      default:
+        return "";
     }
+  };
 
-    return <Text style={styles.profileFont}>{profileType} Name</Text>;
-  }
-}
-
-//checks profile type for picture change
-class ProfilePic extends Component {
-  render() {
-    if (profileType == "Police") {
-      this.style = styles.profilePicPolice;
-    } else {
-      this.style = styles.profilePic;
-    }
-
-    return <View style={this.style} />;
-  }
-}
-
-const LoginScreen = props => {
   return (
-    <View style={styles.profile}>
-      <ProfilePic />
-      <View name="Profile Text">
-        <ProfileName />
-        <Text style={styles.profileFont}>Favorite Games</Text>
-        <Text style={styles.profileFont}>Top Scores</Text>
-        <Text style={styles.profileFont}>Played With</Text>
-      </View>
-      <View name="lastPlayedWithProfiles" style={styles.lastPlayedRow}>
-        <View style={styles.profileLastPlayed} />
-        <View style={styles.profileLastPlayed} />
-        <View style={styles.profileLastPlayed} />
-      </View>
+    <View style={styles.screen}>
+      <View style={styles.outerBorder} />
+      <Image
+        source={require("../../assets/IMG_6919.jpeg")}
+        style={styles.profilePicture}
+      />
+      <Text style={styles.titles}>
+        {profile.firstName + " " + profile.lastName}
+      </Text>
+      <Text style={styles.stats}>Test</Text>
     </View>
   );
 };
 
-LoginScreen.navigationOptions = navData => {
+ProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: "Profile",
     headerLeft: (
@@ -94,43 +72,32 @@ LoginScreen.navigationOptions = navData => {
 };
 
 const styles = StyleSheet.create({
-  profile: {
+  screen: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: "center"
   },
-  profileFont: {
-    //fontFamily: "San Francisco",
-    fontSize: 20,
-    margin: 20
-  },
-  profilePic: {
-    margin: 20,
-    width: 200,
+  profilePicture: {
+    position: "absolute",
     height: 200,
-    borderRadius: 200 / 2,
-    backgroundColor: "grey"
-  },
-  profilePicPolice: {
-    margin: 20,
     width: 200,
-    height: 200,
-    borderRadius: 200 / 2,
-    backgroundColor: "grey",
-    borderColor: "navy",
-    borderWidth: 10
+    zIndex: 2,
+    marginTop: "20%",
+    borderRadius: Platform.OS === "ios" ? 200 / 2 : 100
   },
-  profileLastPlayed: {
-    flexDirection: "row",
-    margin: 20,
-    width: 75,
-    height: 75,
-    borderRadius: 100 / 2,
-    backgroundColor: "pink"
+  titles: {
+    fontSize: 40,
+    marginTop: 10
   },
-  lastPlayedRow: {
-    flexDirection: "row"
+  stats: {
+    fontSize: 30
+  },
+  outerBorder: {
+    position: "absolute",
+    marginTop: "20%",
+    height: 250,
+    width: 250,
+    borderRadius: Platform.OS === "ios" ? 300 / 2 : 150
   }
 });
 
-export default LoginScreen;
+export default ProfileScreen;
