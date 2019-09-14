@@ -9,7 +9,7 @@ module.exports.getAllGames = {
   }
 }
 
-module.exports.getGamesForTitleQuery = {
+module.exports.searchGamesByTitle = {
   type: GraphQLList(GameType),
   args: {
     query: {type: GraphQLString}
