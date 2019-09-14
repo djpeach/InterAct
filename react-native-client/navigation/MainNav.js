@@ -5,6 +5,7 @@ import LoginScreen from "../screens/Auth/LoginScreen";
 import SignUpScreen from "../screens/Auth/SignUpScreen";
 
 import MainScreen from "../screens/users/MainScreen";
+import SplashScreen from "../screens/SplashScreen";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
 import firebase from 'firebase'
@@ -33,12 +34,10 @@ const DrawerNav = createDrawerNavigator({
   }
 });
 
-const CombinedNav = firebase.auth().currentUser ? createSwitchNavigator({
+const CombinedNav = createSwitchNavigator({
+  SplashScreen: SplashScreen,
   DrawerNav: DrawerNav,
   AuthNav: AuthNavigator
-}) : createSwitchNavigator({
-  AuthNav: AuthNavigator,
-  DrawerNav: DrawerNav
 });
 
 export default createAppContainer(CombinedNav);
