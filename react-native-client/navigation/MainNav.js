@@ -7,6 +7,7 @@ import ProfileScreen from "../screens/users/ProfileScreen";
 import QuickPlayScreen from "../screens/users/QuickPlayScreen";
 
 import MainScreen from "../screens/users/MainScreen";
+import SplashScreen from "../screens/SplashScreen";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
 import firebase from "firebase";
@@ -56,8 +57,9 @@ const DrawerNav = createDrawerNavigator({
 });
 
 const CombinedNav = createSwitchNavigator({
-  AuthNav: AuthNavigator,
-  DrawerNav: DrawerNav
+  SplashScreen: SplashScreen,
+  DrawerNav: DrawerNav,
+  AuthNav: AuthNavigator
 });
 
 export default createAppContainer(CombinedNav);
