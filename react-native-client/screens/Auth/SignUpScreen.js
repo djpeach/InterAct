@@ -51,9 +51,7 @@ class SignUpScreen extends Component {
         console.log(err);
       });
 
-    this.props.navigation.navigate({
-      routeName: "SignUp"
-    });
+    this.props.navigation.navigate("MainScreen");
   };
 
   render() {
