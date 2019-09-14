@@ -1,10 +1,10 @@
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 
-export const getProfileById = gql`
-  query($id: ID!) {
-    getProfileById(id: $id) {
-      id
-      email
-    }
+export const getAllProfiles = gql`
+query {
+  getAllProfiles {
+    _id
+    email
   }
-`
+}
+`;

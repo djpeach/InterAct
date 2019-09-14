@@ -1,21 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {ApolloClient} from 'apollo-boost'
-import {ApolloProvider} from 'react-apollo'
+import {ApolloClient, HttpLink, InMemoryCache} from 'apollo-boost'
+import {ApolloProvider, graphql} from 'react-apollo'
 
 import MainNav from "./navigation/MainNav";
+import MainScreen from "./screens/users/MainScreen";
 
-const client = ApolloClient({
-  link: new HttpLink({
-    uri: 'http://localhost:9000/graphql',
-  }),
-  cache: new InMemoryCache()
-})
+const client = new ApolloClient({
+  link: new HttpLink({ uri: 'http://10.34.244.98:9000/graphql' }),
+  cache: new InMemoryCache().restore({}),
+});
 
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <MainNav/>
+      <MainScreen/>
     </ApolloProvider>
   )
 }

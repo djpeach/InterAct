@@ -3,7 +3,6 @@ const cors = require('cors')
 const graphqlHTTP = require('express-graphql')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
-const infoLogger = require('easy-log')('app:info')
 const dbLogger = require('easy-log')('app:db')
 const schema = require('./graphql')
 
