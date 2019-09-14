@@ -7,7 +7,7 @@ const infoLogger = require('easy-log')('app:info')
 const dbLogger = require('easy-log')('app:db')
 const schema = require('./graphql')
 
-mongoose.connect(`mongodb://:@ds235401.mlab.com:35401/node-bucketlist`)
+mongoose.connect(`mongodb://root:root123!@ds359077.mlab.com:59077/ims-hack`)
 mongoose.connection.once('open', () => {
   dbLogger(`Connected to mongodb`)
 })

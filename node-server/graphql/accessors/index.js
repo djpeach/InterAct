@@ -1,9 +1,9 @@
 const gql = require('graphql')
-// const suggestionAccessor = require('./XXXAccessor')
+const profileAccessors = require('./Profile')
 
 module.exports = new gql.GraphQLObjectType({
   name: 'Accessors',
   fields: {
-    // ...xxxAccessor,
+    ...profileAccessors,
   }
 })

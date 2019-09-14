@@ -1,9 +1,9 @@
 const gql = require('graphql')
-// const suggestionMutator = require('./XXXMutator')
+const profileMutators = require('./Profile')
 
 module.exports = new gql.GraphQLObjectType({
   name: 'Mutators',
   fields: {
-    // ...xxxMutator,
+    ...profileMutators,
   }
 })
