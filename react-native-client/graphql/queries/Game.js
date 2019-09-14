@@ -11,7 +11,7 @@ export const getAllGames = gql`
 export const searchGamesByTitle = gql`
   query($query: String) {
     searchGamesByTitle(query: $query) {
-      title
+      title id
     }
   }
 `
