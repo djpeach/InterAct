@@ -1,5 +1,6 @@
-import {getAllProfiles} from './queries/Profile'
+import {getAllProfiles, createProfile} from './queries/Profile'
 
 export {
-  getAllProfiles
+  getAllProfiles,
+  createProfile
 }

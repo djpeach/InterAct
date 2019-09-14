@@ -12,6 +12,9 @@ import {
 } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
+import {createProfile} from '../../graphql'
+import {flowRight as compose} from 'lodash'
+import {graphql} from 'react-apollo'
 
 import firebase from "firebase";
 
@@ -31,7 +34,17 @@ class SignUpScreen extends Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-
+        return this.props.createProfile({
+          variables: {
+            _id: firebase.auth().currentUser.uid,
+            firstName: this.state.first,
+            lastName: this.state.last,
+            accountType: this.state.accountType,
+            phoneNumber: this.state.phone,
+            email: this.state.email
+          }
+        })
+      }).then(() => {
         this.props.navigation.replace("MainScreen");
       })
       .catch(err => {
@@ -203,4 +216,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUpScreen
+export default compose(
+  graphql(createProfile, {name: 'createProfile'})
+)(SignUpScreen)
