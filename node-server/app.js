@@ -1,20 +1,26 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express')
+const cors = require('cors')
+const graphqlHTTP = require('express-graphql')
+const cookieParser = require('cookie-parser')
+const mongoose = require('mongoose')
+const dbLogger = require('easy-log')('app:db')
+const schema = require('./graphql')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+mongoose.connect(`mongodb://root:root123!@ds359077.mlab.com:59077/ims-hack`)
+mongoose.connection.once('open', () => {
+  dbLogger(`Connected to mongodb`)
+})
 
-var app = express();
+const app = express()
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json())
+app.use(cors())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/graphql', graphqlHTTP({
+  schema,
+  graphiql: true,
+}))
 
-module.exports = app;
+module.exports = app
