@@ -63,7 +63,7 @@ class SignUpScreen extends Component {
       >
         <KeyboardAvoidingView
           behavior="padding"
-          keyboardVerticalOffset={50}
+          keyboardVerticalOffset={0}
           style={styles.screen}
         >
           <View style={styles.login}>
@@ -123,6 +123,8 @@ class SignUpScreen extends Component {
               placeholder="Email"
               style={{ ...styles.input, paddingTop: 40 }}
               placeholderTextColor="#707070"
+              keyboardType="email-address"
+              textContentType="emailAddress"
               blurOnSubmit
               autoCapitalize="none"
               autoCorrect={false}
@@ -136,6 +138,7 @@ class SignUpScreen extends Component {
               placeholderTextColor="#707070"
               blurOnSubmit
               autoCapitalize="none"
+              textContentTyp="password"
               autoCorrect={false}
               onChangeText={value => {
                 this.setState({ password: value });
