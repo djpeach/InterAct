@@ -46,10 +46,20 @@ MainScreen.navigationOptions = navData => {
           }}
         />
       </HeaderButtons>
+    ),
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-contact"
+          onPress={() => {
+            navData.navigation.navigate("ProfileScreen");
+          }}
+        />
+      </HeaderButtons>
     )
   };
 };
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
