@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, TextInput } from "react-native";
 import { flowRight as compose } from "lodash";
 import { graphql } from "react-apollo";
 import { getAllProfiles } from "../../graphql";
@@ -7,8 +7,11 @@ import { getAllProfiles } from "../../graphql";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../../components/UI/HeaderButton";
+import GameList from "../../components/UI/GameList";
 
-const MainScreen = ({ getAllProfiles }) => {
+const test = [{ title: "test" }, { title: "test1" }, { title: "test2" }];
+const MainScreen = props => {
+  /*const MainScreen = ({ getAllProfiles }) => {
   const { loading, getAllProfiles: profiles, error } = getAllProfiles;
   if (loading) {
     return (
@@ -30,7 +33,8 @@ const MainScreen = ({ getAllProfiles }) => {
         })}
       </View>
     );
-  }
+  }*/
+  return <GameList listData={test} />;
 };
 
 MainScreen.navigationOptions = navData => {
