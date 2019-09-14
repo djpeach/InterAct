@@ -31,6 +31,7 @@ class SignUpScreen extends Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
+        const user = firebase.auth().currentUser;
 
         this.props.navigation.replace("MainScreen");
       })
@@ -38,9 +39,7 @@ class SignUpScreen extends Component {
         console.log(err);
       });
 
-    this.props.navigation.navigate({
-      routeName: "SignUp"
-    });
+    this.props.navigation.navigate("MainScreen");
   };
 
   render() {
@@ -203,4 +202,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUpScreen
+export default SignUpScreen;
