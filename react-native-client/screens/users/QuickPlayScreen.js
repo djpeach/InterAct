@@ -1,14 +1,18 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, FlatList, TextInput } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import HeaderButton from "../../components/UI/HeaderButton";;
+import HeaderButton from "../../components/UI/HeaderButton";
 import { flowRight as compose } from "lodash";
 import { graphql } from "@apollo/react-hoc";
 import { getAllGames } from "../../graphql";
 
-const QuickPlayScreen = ({ getAllGames }) => {
-  const { loading, getAllGames: games, error } = getAllGames;
+import GameList from "../../components/UI/GameList";
+const test = [{ title: "test" }, { title: "test1" }, { title: "test2" }];
+const QuickPlayScreen = props => {
+  /*const QuickPlayScreen = ({ getAllGames }) => {*/
+
+  /*const { loading, getAllGames: games, error } = getAllGames;
   if (loading) {
     return (
       <View>
@@ -22,16 +26,23 @@ const QuickPlayScreen = ({ getAllGames }) => {
       </View>
     );
   } else if (games) {
-    return (
-      <View>
-        {console.log(games)}
+    return <GameList listData={games} />;
+  }*/
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ alignItems: "center", marginTop: 15 }}>
+        <TextInput placeholder="Search Game" style={styles.searchBar} />
       </View>
-    );
+      <View>
+        <GameList listData={test} />
+      </View>
+    </View>
+  );
 };
 
 QuickPlayScreen.navigationOptions = navData => {
   return {
-    headerTitle: "Home",
+    headerTitle: "Quick Play",
     headerLeft: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
@@ -58,20 +69,17 @@ QuickPlayScreen.navigationOptions = navData => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    alignItems: "center",
-    marginTop: Constants.statusBarHeight
+    alignItems: "center"
   },
-  searchbar: {
-    backgroundColor: "pink",
-    marginVertical: 8,
-    marginHorizontal: 16,
+  searchBar: {
+    backgroundColor: "#FEF0F0",
+    justifyContent: "center",
     width: "90%",
-    padding: 10,
-    fontFamily: "San Francisco",
+    padding: 15,
     fontSize: 20,
-    borderRadius: 20
+    borderRadius: 10
   },
   playFont: {
     fontFamily: "San Francisco",
