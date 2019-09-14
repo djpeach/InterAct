@@ -22,7 +22,7 @@ const LoginScreen = props => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        props.navigation.replace("MainScreen");
+        props.navigation.navigate("MainScreen");
       })
       .catch(function(error) {
         console.log(error);
