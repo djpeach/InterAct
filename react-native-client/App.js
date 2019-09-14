@@ -1,14 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {ApolloClient, HttpLink, InMemoryCache} from 'apollo-boost'
-import {ApolloProvider, graphql} from 'react-apollo'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { ApolloClient, HttpLink, InMemoryCache } from "apollo-boost";
+import { ApolloProvider, graphql } from "react-apollo";
 
 import MainNav from "./navigation/MainNav";
-import MainScreen from "./screens/users/MainScreen";
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://10.34.244.98:9000/graphql' }),
-  cache: new InMemoryCache().restore({}),
+  link: new HttpLink({ uri: "http://10.34.244.98:9000/graphql" }),
+  cache: new InMemoryCache().restore({})
 });
 
 import firebase from "firebase";
@@ -28,9 +27,9 @@ firebase.initializeApp(firebaseConfig);
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <MainScreen/>
+      <MainNav />
     </ApolloProvider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

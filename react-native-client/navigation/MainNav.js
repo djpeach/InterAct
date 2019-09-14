@@ -7,8 +7,6 @@ import SignUpScreen from "../screens/Auth/SignUpScreen";
 import MainScreen from "../screens/users/MainScreen";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
-import Test from "../screens/Auth/Test";
-
 const AuthNavigator = createStackNavigator({
   Login: {
     screen: LoginScreen

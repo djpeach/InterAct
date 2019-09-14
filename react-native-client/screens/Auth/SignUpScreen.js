@@ -31,6 +31,7 @@ class SignUpScreen extends Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
+
         this.props.navigation.replace("MainScreen");
       })
       .catch(err => {
