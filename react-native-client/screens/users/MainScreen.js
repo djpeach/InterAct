@@ -31,14 +31,19 @@ const MainScreen = ({getAllProfiles}) => {
       </View>
     )
   }
+}
+
+MainScreen.navigationOptions = {
+  headerTitle: "Home"
 };
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
   }
-});
+})
 
 export default compose(
   graphql(getAllProfiles, {name: 'getAllProfiles'})
