@@ -1,17 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import Constants from "expo-constants";
-import { SafeAreaView } from "react-navigation";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import HeaderButton from "../../components/UI/HeaderButton";
+import HeaderButton from "../../components/UI/HeaderButton";;
+import { flowRight as compose } from "lodash";
+import { graphql } from "@apollo/react-hoc";
+import { getAllGames } from "../../graphql";
 
-const QuickPlayScreen = props => {
-  return (
-    <View>
-      <Text>Test</Text>
-    </View>
-  );
+const QuickPlayScreen = ({ getAllGames }) => {
+  const { loading, getAllGames: games, error } = getAllGames;
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  } else if (error) {
+    return (
+      <View>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  } else if (games) {
+    return (
+      <View>
+        {console.log(games)}
+      </View>
+    );
 };
 
 QuickPlayScreen.navigationOptions = navData => {
@@ -85,4 +100,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default QuickPlayScreen;
+export default compose(graphql(getAllGames, { name: "getAllGames" }))(
+  QuickPlayScreen
+);
