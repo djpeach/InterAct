@@ -13,6 +13,8 @@ import MessagesScreen from "../screens/users/MessagesScreen";
 import SettingScreen from "../screens/users/SettingScreen";
 import FeedbackScreen from "../screens/users/FeedbackScreen";
 
+import GameScreen from "../screens/users/GameScreen";
+
 const AuthNavigator = createStackNavigator({
   Login: {
     screen: LoginScreen
@@ -27,7 +29,10 @@ const ProfileNav = createStackNavigator({
 });
 
 const QuickNav = createStackNavigator({
-  QuickNav: QuickPlayScreen
+  QuickNav: QuickPlayScreen,
+  GameScreenNav: {
+    screen: GameScreen
+  }
 });
 
 const MsgNav = createStackNavigator({
