@@ -9,8 +9,9 @@ import QuickPlayScreen from "../screens/users/QuickPlayScreen";
 import MainScreen from "../screens/users/MainScreen";
 import SplashScreen from "../screens/SplashScreen";
 import { createDrawerNavigator } from "react-navigation-drawer";
-
-import firebase from "firebase";
+import MessagesScreen from "../screens/users/MessagesScreen";
+import SettingScreen from "../screens/users/SettingScreen";
+import FeedbackScreen from "../screens/users/FeedbackScreen";
 
 const AuthNavigator = createStackNavigator({
   Login: {
@@ -29,10 +30,22 @@ const QuickNav = createStackNavigator({
   QuickNav: QuickPlayScreen
 });
 
+const MsgNav = createStackNavigator({
+  MsgNav: MessagesScreen
+});
+
+const SettingsNav = createStackNavigator({
+  SettingsNav: SettingScreen
+});
+
 const MainScreenNav = createStackNavigator({
   MainScreen: {
     screen: MainScreen
   }
+});
+
+const FeedNav = createStackNavigator({
+  FeedScreen: FeedbackScreen
 });
 
 const DrawerNav = createDrawerNavigator({
@@ -48,10 +61,28 @@ const DrawerNav = createDrawerNavigator({
       drawerLabel: "Quick Play"
     }
   },
+  MessagesScreen: {
+    screen: MsgNav,
+    navigationOptions: {
+      drawerLabel: "Messages"
+    }
+  },
   ProfileScreen: {
     screen: ProfileNav,
     navigationOptions: {
       drawerLabel: "Profile"
+    }
+  },
+  SettingScreen: {
+    screen: SettingsNav,
+    navigationOptions: {
+      drawerLabel: "Settings"
+    }
+  },
+  FeedScreen: {
+    screen: FeedNav,
+    navigationOptions: {
+      drawerLabel: "Feedback"
     }
   }
 });
