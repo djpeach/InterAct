@@ -5,10 +5,7 @@ import LoginScreen from "../screens/Auth/LoginScreen";
 import SignUpScreen from "../screens/Auth/SignUpScreen";
 
 import MainScreen from "../screens/users/MainScreen";
-
-const UserNavigator = createStackNavigator({
-  MainScreen: MainScreen
-});
+import { createDrawerNavigator } from "react-navigation-drawer";
 
 const AuthNavigator = createStackNavigator({
   Login: {
@@ -17,13 +14,26 @@ const AuthNavigator = createStackNavigator({
   SignUp: {
     screen: SignUpScreen
   }
-
 });
 
-const MainNavigator = createSwitchNavigator({
-  Auth: AuthNavigator,
-  User: UserNavigator
+const MainScreenNav = createStackNavigator({
+  MainScreen: {
+    screen: MainScreen
+  }
 });
 
-export default createAppContainer(MainNavigator)
+const DrawerNav = createDrawerNavigator({
+  MainScreen: {
+    screen: MainScreenNav,
+    navigationOptions: {
+      drawerLabel: "Home"
+    }
+  }
+});
 
+const CombinedNav = createSwitchNavigator({
+  AuthNav: AuthNavigator,
+  DrawerNav: DrawerNav
+});
+
+export default createAppContainer(CombinedNav);

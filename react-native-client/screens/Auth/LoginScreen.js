@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
   View,
   Text,
@@ -10,7 +11,23 @@ import {
   Keyboard
 } from "react-native";
 
+import firebase from "firebase";
+
 const LoginScreen = props => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLogin = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        props.navigation.navigate("MainScreen");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -24,24 +41,37 @@ const LoginScreen = props => {
       >
         <View style={styles.login}>
           <TextInput
-            placeholder="Username"
+            placeholder="Email"
             style={styles.input}
             placeholderTextColor="#707070"
             blurOnSubmit
             autoCapitalize="none"
             autoCorrect={false}
+            onChangeText={value => {
+              setEmail(value);
+            }}
           />
           <TextInput
             placeholder="Password"
             style={{ ...styles.input, paddingTop: 40 }}
             placeholderTextColor="#707070"
+            onChangeText={value => {
+              setPassword(value);
+            }}
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button title="Login" color="white" onPress={() => {}} />
+              <Button title="Login" color="white" onPress={onLogin} />
             </View>
             <View style={styles.buttonStyle}>
-              <Button title="Sign Up" onPress={() => {}} />
+              <Button
+                title="Sign Up"
+                onPress={() => {
+                  props.navigation.navigate({
+                    routeName: "SignUp"
+                  });
+                }}
+              />
             </View>
           </View>
         </View>
