@@ -7,3 +7,11 @@ export const getAllGames = gql`
     }
   }
 `
+
+export const searchGameByTitle = gql`
+  query($q: String){
+    searchGameByTitle(query: $q) {
+      id title timesPlayed
+    }
+  }
+`
