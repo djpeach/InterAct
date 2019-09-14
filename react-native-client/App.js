@@ -5,7 +5,7 @@ import { ApolloProvider, graphql } from "react-apollo";
 
 import MainNav from "./navigation/MainNav";
 
-import LoginScreen from "./screens/Auth/LoginScreen";
+import GameScreen from "./screens/users/GameScreen";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://10.34.244.98:9000/graphql" }),
@@ -29,7 +29,7 @@ firebase.initializeApp(firebaseConfig);
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <MainNav />
+      <GameScreen />
     </ApolloProvider>
   );
 }
